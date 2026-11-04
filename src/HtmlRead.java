@@ -15,7 +15,7 @@ public class HtmlRead {
         try {
             System.out.println();
             System.out.print("hello \n");
-            URL url = new URL("https://www.vexrobotics.com");
+            URL url = new URL("https://en.wikipedia.org/wiki/Inception");
 
             URLConnection urlc = url.openConnection();
             urlc.setRequestProperty("User-Agent", "Mozilla 5.0 (Windows; U; " + "Windows NT 5.1; en-US; rv:1.8.0.11) ");
