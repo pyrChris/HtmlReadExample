@@ -28,7 +28,14 @@ public class HtmlRead {
                 if(line.contains("https:")) {
                     int index = line.indexOf("https:");
                     String newSubstring = line.substring(index);
-                    System.out.println(newSubstring.substring(0,newSubstring.indexOf('"')));
+                    int tracker = 0;
+                    for(int i=0;i<newSubstring.length();i++){
+                        if(newSubstring.charAt(i) == '"' || newSubstring.substring(i,i).equals("'")){
+                            tracker = i;
+                            break;
+                        }
+                    }
+                    System.out.println(newSubstring.substring(0,tracker));
                 }
             }
             reader.close();
