@@ -24,20 +24,48 @@ public class Project {
             String line;
             while ( (line = reader.readLine()) != null ) {
 
-                if(line.contains("href=\"")) {
+                if(line.contains("href=\"") || line.contains("url=")) {
                     System.out.println(line);
 
+//                    for(int i=0;i<line.length();i++){
+//
+//                    }
+//                    int temp1 = line.indexOf("href=\"");
+//                    int temp2 = line.indexOf("url=");
+//                    int index;
+//                    String processedString;
+//                    if(temp1<temp2){
+//                        index = temp1;
+//                        processedString = line.substring(index+6);
+//                    }
+//                    else{
+//                        index = temp2;
+//                        processedString = line.substring(index+4);
+//                    }
                     int index = line.indexOf("href=\"");
-                    String newSubstring = line.substring(index+6);
-                    int tracker = 0;
-                    for(int i=0;i<newSubstring.length();i++){
-                        //
-                        if(newSubstring.charAt(i) == '"' || newSubstring.substring(i,i).equals("'")){
-                            tracker = i;
-                            break;
+                    String processedString = line.substring(index+6);
+                    int tracker;
+                    while(processedString.contains("href=\"")||processedString.contains("url=")){
+                        for(int i=0;i<processedString.length();i++){
+                            if(processedString.charAt(i) == '"' || processedString.charAt(i) == '\'' || processedString.charAt(i) == ' ' || processedString.charAt(i) == '}'){
+                                tracker = i;
+                                System.out.println(processedString.substring(0,tracker));
+                                processedString = processedString.substring(tracker);
+                                break;
+                            }
                         }
                     }
-                    System.out.println(newSubstring.substring(0,tracker));
+//                    int index = line.indexOf("href=\"");
+//                    String newSubstring = line.substring(index+6);
+//                    int tracker = 0;
+//                    for(int i=0;i<newSubstring.length();i++){
+//                        //
+//                        if(newSubstring.charAt(i) == '"' || newSubstring.substring(i,i).equals("'")){
+//                            tracker = i;
+//                            break;
+//                        }
+//                    }
+//                    System.out.println(newSubstring.substring(0,tracker));
                 }
             }
             reader.close();
