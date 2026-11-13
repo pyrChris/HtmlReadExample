@@ -3,6 +3,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Scanner;
 
 public class Project {
 
@@ -12,8 +13,20 @@ public class Project {
 
     public Project() {
 
+        String filterString;
+        int index;
+        int trackerEnd;
+
+        Scanner input = new Scanner(System.in);
+
+
+
         try {
-            URL url = new URL("https://en.wikipedia.org/wiki/Inception");
+            System.out.print("Enter the link: ");
+            URL url = new URL(input.nextLine());
+
+            System.out.print("Enter the filter name: ");
+            filterString = input.nextLine();
 
             URLConnection urlc = url.openConnection();
             urlc.setRequestProperty("User-Agent", "Mozilla 5.0 (Windows; U; " + "Windows NT 5.1; en-US; rv:1.8.0.11) ");
@@ -25,48 +38,22 @@ public class Project {
             while ( (line = reader.readLine()) != null ) {
 
                 if(line.contains("href=\"") || line.contains("url=")) {
-                    System.out.println(line);
-
-//                    for(int i=0;i<line.length();i++){
-//
-//                    }
-//                    int temp1 = line.indexOf("href=\"");
-//                    int temp2 = line.indexOf("url=");
-//                    int index;
-//                    String processedString;
-//                    if(temp1<temp2){
-//                        index = temp1;
-//                        processedString = line.substring(index+6);
-//                    }
-//                    else{
-//                        index = temp2;
-//                        processedString = line.substring(index+4);
-//                    }
-                    int index = line.indexOf("href=\"");
-                    String processedString = line.substring(index+6);
-                    int tracker;
-                    while(processedString.contains("href=\"")||processedString.contains("url=")){
+                    //System.out.println(line);
+                    String processedString = line;
+                    while(processedString.contains("href=")){
+                        index = processedString.indexOf("href=");
+                        processedString = processedString.substring(index+6);
                         for(int i=0;i<processedString.length();i++){
                             if(processedString.charAt(i) == '"' || processedString.charAt(i) == '\'' || processedString.charAt(i) == ' ' || processedString.charAt(i) == '}'){
-                                tracker = i;
-                                System.out.println(processedString.substring(0,tracker));
-                                processedString = processedString.substring(tracker);
-                                System.out.println(processedString);
+                                trackerEnd = i;
+                                if(processedString.substring(0,trackerEnd).contains(filterString)){
+                                    System.out.println(processedString.substring(0,trackerEnd));
+                                }
+                                processedString = processedString.substring(trackerEnd);
                                 break;
                             }
                         }
                     }
-//                    int index = line.indexOf("href=\"");
-//                    String newSubstring = line.substring(index+6);
-//                    int tracker = 0;
-//                    for(int i=0;i<newSubstring.length();i++){
-//                        //
-//                        if(newSubstring.charAt(i) == '"' || newSubstring.substring(i,i).equals("'")){
-//                            tracker = i;
-//                            break;
-//                        }
-//                    }
-//                    System.out.println(newSubstring.substring(0,tracker));
                 }
             }
             reader.close();
