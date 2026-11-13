@@ -51,6 +51,7 @@ public class Project {
                                 tracker = i;
                                 System.out.println(processedString.substring(0,tracker));
                                 processedString = processedString.substring(tracker);
+                                System.out.println(processedString);
                                 break;
                             }
                         }
