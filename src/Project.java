@@ -5,7 +5,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
 
-public class Project {
+
+public class Project{
 
     public static void main(String[] args) {
         Project html = new Project();
@@ -13,6 +14,12 @@ public class Project {
 
     public Project() {
 
+        while(true){
+            processLink();
+        }
+    }
+
+    public void processLink(){
         String filterString;
         int index;
         int trackerEnd;
@@ -37,8 +44,6 @@ public class Project {
             String line;
             while ( (line = reader.readLine()) != null ) {
 
-
-
                 if(line.contains("href=\"") || line.contains("url=")) {
                     //System.out.println(line);
                     String processedString = line;
@@ -62,7 +67,5 @@ public class Project {
         } catch(Exception ex) {
             System.out.println(ex);
         }
-
     }
-
 }
