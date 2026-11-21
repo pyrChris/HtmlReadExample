@@ -19,6 +19,7 @@ public class Project{
     }
 
     public void processLink(){
+
         //definition of variables used
         String link = "";
         String filterString;
